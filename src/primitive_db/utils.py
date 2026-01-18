@@ -1,10 +1,7 @@
 import json
-from pathlib import Path
 
-# Константы для путей
-DATA_DIR = Path("data")
-DATA_DIR.mkdir(exist_ok=True)
-METADATA_FILE = Path("db_meta.json")
+from constants import DATA_DIR, DEFAULT_ENCODING, JSON_INDENT, METADATA_FILE
+
 
 def load_metadata(filepath=METADATA_FILE):
     """
@@ -17,7 +14,7 @@ def load_metadata(filepath=METADATA_FILE):
         dict: Загруженные данные или пустой словарь
     """
     try:
-        with open(filepath, 'r', encoding='utf-8') as f:
+        with open(filepath, 'r', encoding=DEFAULT_ENCODING) as f:
             return json.load(f)
     except FileNotFoundError:
         return {}
@@ -37,8 +34,8 @@ def save_metadata(data=None, filepath=METADATA_FILE):
         data = {}
     
     try:
-        with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
+        with open(filepath, 'w', encoding=DEFAULT_ENCODING) as f:
+            json.dump(data, f, indent=JSON_INDENT, ensure_ascii=False)
     except Exception as e:
         print(f"Ошибка при сохранении файла {filepath}: {e}")
 
@@ -55,7 +52,7 @@ def load_table_data(table_name):
     filepath = DATA_DIR / f"{table_name}.json"
     
     try:
-        with open(filepath, 'r', encoding='utf-8') as f:
+        with open(filepath, 'r', encoding=DEFAULT_ENCODING) as f:
             return json.load(f)
     except FileNotFoundError:
         return []  # Возвращаем пустой список, если файла нет
@@ -78,7 +75,7 @@ def save_table_data(table_name, data):
     filepath = DATA_DIR / f"{table_name}.json"
     
     try:
-        with open(filepath, 'w', encoding='utf-8') as f:
-            json.dump(data, f, indent=2, ensure_ascii=False)
+        with open(filepath, 'w', encoding=DEFAULT_ENCODING) as f:
+            json.dump(data, f, indent=JSON_INDENT, ensure_ascii=False)
     except Exception as e:
         print(f"Ошибка при сохранении файла {filepath}: {e}")
