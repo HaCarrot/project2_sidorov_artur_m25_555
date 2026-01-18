@@ -1,0 +1,1 @@
+# project2_sidorov_artur_m25_555
