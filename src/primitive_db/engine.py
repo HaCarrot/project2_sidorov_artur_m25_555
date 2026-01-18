@@ -7,7 +7,6 @@ def run():
     """
     Главная функция - запускает основной цикл программы
     """
-    print("***Процесс работы с таблицей***")
     print_help()
     
     while True:
@@ -23,11 +22,9 @@ def run():
             metadata = utils.load_metadata()
             
             if command == "exit":
-                print("Выход из программы...")
                 break
                 
             elif command == "help":
-                print("***Процесс работы с таблицей***")
                 print_help()
                 
             elif command == "create_table":
