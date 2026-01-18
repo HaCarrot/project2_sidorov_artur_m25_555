@@ -1,5 +1,6 @@
 import shlex
 
+
 def parse_where_clause(where_str):
     """
     Парсит условие WHERE.
@@ -24,17 +25,14 @@ def parse_where_clause(where_str):
            (value.startswith("'") and value.endswith("'")):
             value = value[1:-1]
         
-        try:
-            if value.lower() == 'true':
-                value = True
-            elif value.lower() == 'false':
-                value = False
-            elif value.isdigit():
-                value = int(value)
-            elif value.replace('.', '', 1).isdigit() and value.count('.') == 1:
-                value = float(value)
-        except:
-            pass
+        if value.lower() == 'true':
+            value = True
+        elif value.lower() == 'false':
+            value = False
+        elif value.isdigit():
+            value = int(value)
+        elif value.replace('.', '', 1).isdigit() and value.count('.') == 1:
+            value = float(value)
         
         return {column: value}
     
@@ -67,17 +65,14 @@ def parse_set_clause(set_str):
                (value.startswith("'") and value.endswith("'")):
                 value = value[1:-1]
             
-            try:
-                if value.lower() == 'true':
-                    value = True
-                elif value.lower() == 'false':
-                    value = False
-                elif value.isdigit():
-                    value = int(value)
-                elif value.replace('.', '', 1).isdigit() and value.count('.') == 1:
-                    value = float(value)
-            except:
-                pass
+            if value.lower() == 'true':
+                value = True
+            elif value.lower() == 'false':
+                value = False
+            elif value.isdigit():
+                value = int(value)
+            elif value.replace('.', '', 1).isdigit() and value.count('.') == 1:
+                value = float(value)
             
             result[column] = value
     

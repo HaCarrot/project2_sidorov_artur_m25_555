@@ -1,7 +1,7 @@
 import shlex
-from . import utils
-from . import core
-from . import parser
+
+from . import core, parser, utils
+
 
 def run():
     """
@@ -30,7 +30,7 @@ def run():
                 
             elif command == "create_table":
                 if len(parts) < 2:
-                    print("Использование: create_table <имя_таблицы> <столбец1:тип> <столбец2:тип> ...")
+                    print("Использование: create_table <имя_таблицы> <столбец1:тип> <столбец2:тип> ...") # noqa: E501
                     continue
                 
                 table_name = parts[1]
@@ -38,7 +38,7 @@ def run():
                 
                 for col_def in parts[2:]:
                     if ":" not in col_def:
-                        print(f'Ошибка: Некорректный формат столбца "{col_def}". Используйте имя:тип')
+                        print(f'Ошибка: Некорректный формат столбца "{col_def}". Используйте имя:тип') # noqa: E501
                         break
                     
                     col_name, col_type = col_def.split(":", 1)
@@ -68,8 +68,8 @@ def run():
                 core.info_table(metadata, table_name)
                 
             elif command == "insert":
-                if len(parts) < 6 or parts[1].lower() != "into" or parts[3].lower() != "values":
-                    print('Использование: insert into <имя_таблицы> values (<значение1>, <значение2>, ...)')
+                if len(parts) < 6 or parts[1].lower() != "into" or parts[3].lower() != "values": # noqa: E501
+                    print('Использование: insert into <имя_таблицы> values (<значение1>, <значение2>, ...)') # noqa: E501
                     continue
                 
                 table_name = parts[2]
@@ -94,8 +94,8 @@ def run():
                     core.select(metadata, table_name)
                 
             elif command == "update":
-                if len(parts) < 7 or parts[2].lower() != "set" or parts[6].lower() != "where":
-                    print('Использование: update <имя_таблицы> set <столбец> = <значение> where <столбец_условия> = <значение_условия>')
+                if len(parts) < 7 or parts[2].lower() != "set" or parts[6].lower() != "where": # noqa: E501
+                    print('Использование: update <имя_таблицы> set <столбец> = <значение> where <столбец_условия> = <значение_условия>') # noqa: E501
                     continue
                 
                 table_name = parts[1]
@@ -113,7 +113,7 @@ def run():
                     core.update(metadata, table_name, set_clause, where_clause)
                 
             elif command == "delete":
-                if len(parts) < 5 or parts[1].lower() != "from" or parts[3].lower() != "where":
+                if len(parts) < 5 or parts[1].lower() != "from" or parts[3].lower() != "where": # noqa: E501
                     print("Использование: delete from <имя_таблицы> where <условие>")
                     continue
                 
@@ -138,7 +138,7 @@ def print_help():
     Выводит справочную информацию
     """
     help_text = """Функции:
-<command> insert into <имя_таблицы> values (<значение1>, <значение2>, ...) - создать запись.
+<command> insert into <имя_таблицы> values (<значение1>, <значение2>, ...) - создать запись. 
 <command> select from <имя_таблицы> where <столбец> = <значение> - прочитать записи по условию.
 <command> select from <имя_таблицы> - прочитать все записи.
 <command> update <имя_таблицы> set <столбец1> = <новое_значение1> where <столбец_условия> = <значение_условия> - обновить запись.
@@ -148,5 +148,5 @@ def print_help():
 <command> list_tables - показать список всех таблиц
 <command> drop_table <имя_таблицы> - удалить таблицу
 <command> exit - выход из программы
-<command> help - справочная информация"""
+<command> help - справочная информация""" # noqa: E501
     print(help_text)
